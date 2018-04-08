@@ -3,14 +3,12 @@ class Node {
   constructor(data = null) {
     this.data = data;
     this.next = null;
-    // this.previous = null;
   }
 }
 
 class LinkedList {
   constructor() {
     this.head = null;
-    // this.tail = null;
   }
 
   insert(node) {
@@ -23,31 +21,24 @@ class LinkedList {
   }
 
   display() {
-    this.print(this.head);
-  }
-
-  print(node) { // recursive helper function for display()
-    if (node) { // test for empty list
-      console.log(node.data);
-      if (node.next) { // test for end of list
-        this.print(node.next);
+    if (this.head) {
+      let n = this.head;
+      while (n) {
+        console.log(n.data);
+        n = n.next;
       }
     }
   }
 
   search(data) {
-    return this.find(data, this.head);
-  }
-
-  find(data, node) { // recursive helper function for search()
-    console.log("A", data, node.data);
-    if (node) {
-      console.log("B", data, node.data);
-      if (node.data == data) {
-        console.log("C", data, node.data);
-        return true;
-      } else if (node.next) {
-        return find(data, node.next);
+    if (this.head) {
+      let n = this.head;
+      while (n) {
+        if (n.data == data) {
+          return true;
+        } else {
+          n = n.next;
+        }
       }
     }
     return false;
