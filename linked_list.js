@@ -16,8 +16,29 @@ class LinkedList {
     this.head = node;
   }
 
-  del() {
-    this.head = this.head.next;
+  del(data = null) {
+    if (data) {
+      let i = this.search(data);
+      switch (i) {
+        case -1:
+          break;
+        case 0:
+          this.head = this.head.next;
+          break;
+        default:
+          let n = this.head;
+          for (let j = 0; j < i - 1; j++) {
+            n = n.next;
+          }
+          if (n.next.next) {
+            n.next = n.next.next;
+          } else {
+            n.next = null;
+          }
+      }
+    } else {
+      this.head = this.head.next;
+    }
   }
 
   display() {
@@ -33,21 +54,27 @@ class LinkedList {
   search(data) {
     if (this.head) {
       let n = this.head;
+      let i = 0;
       while (n) {
         if (n.data == data) {
-          return true;
+          return i;
         } else {
           n = n.next;
+          i++;
         }
       }
     }
-    return false;
+    return -1;
   }
 }
 
 let l = new LinkedList();
 l.insert(new Node("world"));
 l.insert(new Node("Hello"));
+l.insert(new Node("list"));
+l.insert(new Node("long"));
+l.insert(new Node("a"));
+l.insert(new Node("is"));
 l.insert(new Node("This"));
 console.log(JSON.stringify(l));
 l.del();
@@ -55,3 +82,6 @@ console.log(JSON.stringify(l));
 l.display();
 console.log(l.search("world"));
 console.log(l.search("globe"));
+l.del("long");
+l.del("is");
+l.display();
